@@ -17,7 +17,6 @@ export class ProgressQuery extends QueryEntity<ProgressState> {
   }
 }
 
-
 @Injectable({ providedIn: 'root' })
 export class UserQueryService {
   userFilters;
@@ -31,7 +30,7 @@ export class UserQueryService {
 
   updateSearchFilter(searchValue: string): void {
     if (!searchValue || searchValue.length === 0) {
-      this.userFilters.removeFilter(SEARCH_FILTER_ID);
+      this.userFilters.removeFilter(FILTERS.SEARCH_FILTER_ID);
     } else {
       this.userFilters.setFilter(getSearchFilter(searchValue));
     }
@@ -39,7 +38,7 @@ export class UserQueryService {
 
   updateStateFilter(states: Set<'a' | 'b' | 'c'>): void {
     if (!states || states.size === 0) {
-      this.userFilters.removeFilter(STATE_FILTER_ID);
+      this.userFilters.removeFilter(FILTERS.STATE_FILTER_ID);
     } else {
       this.userFilters.setFilter(getStateFilter(states));
     }
@@ -47,7 +46,7 @@ export class UserQueryService {
 
   updateSearchNameFilter(searchValue: string): void {
     if (!searchValue || searchValue.length === 0) {
-      this.userFilters.removeFilter(SEARCH_BY_NAME_FILTER_ID);
+      this.userFilters.removeFilter(FILTERS.SEARCH_BY_NAME_FILTER_ID);
     } else {
       this.userFilters.setFilter(getSearchOnNameFilter(searchValue));
     }
@@ -70,15 +69,17 @@ export class UserQueryService {
   }
 }
 
-export const SEARCH_FILTER_ID = 'search';
-export const STATE_FILTER_ID = 'state';
-export const SEARCH_BY_NAME_FILTER_ID = 'searchByName';
+export enum FILTERS {
+  SEARCH_FILTER_ID = 'search',
+  STATE_FILTER_ID = 'state',
+  SEARCH_BY_NAME_FILTER_ID = 'searchByName'
+}
 
-const getBaseFilter = (id: string, name: string, order: number) => ({id, name, order});
+const getBaseFilter = (id: FILTERS, name: string, order: number) => ({id, name, order});
 
-const baseSearchFilter = getBaseFilter(SEARCH_FILTER_ID, SEARCH_FILTER_ID, 2);
-const baseStateFilter = getBaseFilter(STATE_FILTER_ID, STATE_FILTER_ID, 3);
-const baseSearchByNameFilter = getBaseFilter(SEARCH_BY_NAME_FILTER_ID, SEARCH_BY_NAME_FILTER_ID, 4);
+const baseSearchFilter = getBaseFilter(FILTERS.SEARCH_FILTER_ID, FILTERS.SEARCH_FILTER_ID, 2);
+const baseStateFilter = getBaseFilter(FILTERS.STATE_FILTER_ID, FILTERS.STATE_FILTER_ID, 3);
+const baseSearchByNameFilter = getBaseFilter(FILTERS.SEARCH_BY_NAME_FILTER_ID, FILTERS.SEARCH_BY_NAME_FILTER_ID, 4);
 
 const getSearchFilter = (search: string) =>
   ({...baseSearchFilter,

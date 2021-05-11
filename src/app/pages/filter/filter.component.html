@@ -1,1 +1,12 @@
-<p>filter works!</p>
+<div *ngFor="let filter of filters$ | async; trackBy: filterIdentityFn">
+     <div [ngSwitch]="filter.id">
+       <div *ngSwitchCase="FILTERS.SEARCH_BY_NAME_FILTER_ID">
+         Search by name filter
+         <input [formControl]="searchByNameControl"/>
+       </div>
+       <div *ngSwitchCase="FILTERS.SEARCH_FILTER_ID">
+         General search filter
+         <input [formControl]="searchFilterControl"/>
+       </div>
+     </div>
+</div>

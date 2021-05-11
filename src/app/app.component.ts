@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import {UsersQuery} from './state/users.query';
-import {UsersService} from './state/users.service';
-import {UserQueryService} from './state/progress.query';
+import {UsersQuery} from './shared/state/users.query';
+import {UsersService} from './shared/state/users.service';
+import {UserQueryService} from './shared/state/progress.query';
 
 @Component({
   selector: 'app-root',

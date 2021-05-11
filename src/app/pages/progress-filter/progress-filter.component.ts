@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProgressFilterComponent implements OnInit {
 
-  constructor(private readonly q) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
