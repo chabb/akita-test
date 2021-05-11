@@ -1,20 +1,53 @@
+<div class="filter">
+  <nz-input-group [nzSuffix]="suffixIconSearch">
+    <input type="text" [formControl]="overallFilterControl" nz-input placeholder="Input search text" />
+  </nz-input-group>
+  <ng-template #suffixIconSearch>
+    <i nz-icon nzType="search"></i>
+  </ng-template>
+</div>
+
+
 <nz-table #filterTable
           (nzQueryParams)="onQueryParamsChange($event)"
           [nzData]="(listOfData$ | async)!" nzTableLayout="fixed">
   <thead>
   <tr>
-    <th nzColumnKey="name" [nzSortFn]="true">Name</th>
-    <th nzColumnKey="email" [nzSortFn]="true">Email</th>
+    <th nzCustomFilter nzColumnKey="name">
+      Name
+      <nz-filter-trigger [(nzVisible)]="visible" [nzActive]="searchByNameControl.value.length > 0" [nzDropdownMenu]="menu">
+        <i nz-icon nzType="search"></i>
+      </nz-filter-trigger>
+    </th>
+    <th nzColumnKey="email">Email</th>
     <th nzColumnKey="state" [nzFilters]="filterState" [nzFilterFn]="true">Gender</th>
-    <th nzColumnKey="progress"></th>
+    <th nzColumnKey="progress">
+      Progress
+    </th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of filterTable.data">
+  <tr *ngFor="let data of filterTable.data; trackBy: identityFn">
     <td>{{ data.name }}</td>
     <td>{{ data.email }}</td>
     <td>{{ data.state }}</td>
-    <td>{{ data.progress }}</td>
+    <td>
+      <div class="progress-outer">
+        <div class="progress-inner" style="width:{{data.progress! * 100}}%"></div>
+      </div>
+    </td>
   </tr>
   </tbody>
 </nz-table>
+
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input type="text" nz-input placeholder="Search name" [formControl]="searchByNameControl" />
+      <button nz-button nzSize="small" nzType="primary" (click)="searchAction$.next(searchByNameControl.value)" class="search-button">
+        Search
+      </button>
+      <button nz-button nzSize="small" (click)="searchAction$.next('')">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu>

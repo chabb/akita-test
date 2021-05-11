@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { QueryEntity } from '@datorama/akita';
 import { ProgressStore, ProgressState } from './progress.store';
-import {AkitaFiltersPlugin, searchFilter} from 'akita-filters-plugin';
+import {AkitaFiltersPlugin, searchFilter, searchFilterIn} from 'akita-filters-plugin';
 import {UsersStore, UserViewModel} from './users.store';
 import {UsersQuery} from './users.query';
 import {map, startWith, switchMap, tap} from 'rxjs/operators';
@@ -27,21 +27,11 @@ export class UserQueryService {
               private userQuery: UsersQuery) {
     // @ts-ignore :(
     this.userFilters = new AkitaFiltersPlugin<UsersStore>(this.userQuery);
-    this.userFilters.setFilter({
-      id: 'search',
-      value: 'ab',
-      order: 20,
-      name: 'test',
-
-      predicate: (value: UserViewModel, index, array) => {
-        return searchFilter('', value);
-      }
-    });
   }
 
   updateSearchFilter(searchValue: string): void {
-    if (!searchValue) {
-      this.userFilters.removeFilter('search');
+    if (!searchValue || searchValue.length === 0) {
+      this.userFilters.removeFilter(SEARCH_FILTER_ID);
     } else {
       this.userFilters.setFilter(getSearchFilter(searchValue));
     }
@@ -49,12 +39,19 @@ export class UserQueryService {
 
   updateStateFilter(states: Set<'a' | 'b' | 'c'>): void {
     if (!states || states.size === 0) {
-      this.userFilters.removeFilter('state');
+      this.userFilters.removeFilter(STATE_FILTER_ID);
     } else {
       this.userFilters.setFilter(getStateFilter(states));
     }
   }
 
+  updateSearchNameFilter(searchValue: string): void {
+    if (!searchValue || searchValue.length === 0) {
+      this.userFilters.removeFilter(SEARCH_BY_NAME_FILTER_ID);
+    } else {
+      this.userFilters.setFilter(getSearchOnNameFilter(searchValue));
+    }
+  }
 
   getFilteredUsersWithProgress(): Observable<UserViewModel[]> {
     // @ts-ignore :(
@@ -73,25 +70,29 @@ export class UserQueryService {
   }
 }
 
-const BASE_SEARCH_FILTER = {
-  id: 'search',
-  name: 'search',
-  order: 2
-};
+export const SEARCH_FILTER_ID = 'search';
+export const STATE_FILTER_ID = 'state';
+export const SEARCH_BY_NAME_FILTER_ID = 'searchByName';
 
-const BASE_STATE_FILTER = {
-  id: 'state',
-  name: 'state',
-  order: 3
-};
+const getBaseFilter = (id: string, name: string, order: number) => ({id, name, order});
+
+const baseSearchFilter = getBaseFilter(SEARCH_FILTER_ID, SEARCH_FILTER_ID, 2);
+const baseStateFilter = getBaseFilter(STATE_FILTER_ID, STATE_FILTER_ID, 3);
+const baseSearchByNameFilter = getBaseFilter(SEARCH_BY_NAME_FILTER_ID, SEARCH_BY_NAME_FILTER_ID, 4);
 
 const getSearchFilter = (search: string) =>
-  ({...BASE_SEARCH_FILTER,
+  ({...baseSearchFilter,
     value: search,
     predicate: (v: UserViewModel) => searchFilter(search, v) });
 
 const getStateFilter = (states: Set<'a' | 'b' | 'c'>) =>
-  ({...BASE_STATE_FILTER,
+  ({...baseStateFilter,
     value: states,
     predicate: (v: UserViewModel) => states.has(v.state as 'a' | 'b' | 'c')
+  });
+
+const getSearchOnNameFilter = (search: string) =>
+  ({...baseSearchByNameFilter,
+    value: search,
+    predicate: (v: UserViewModel) => searchFilterIn(search, v, 'name')
   });
