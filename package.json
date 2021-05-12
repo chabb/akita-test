@@ -8,6 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "deploy:github": "ng deploy --base-href=.",
     "madge:detect": "madge  --ts-config=tsconfig.json --circular --extensions ts ./src",
     "madge:detect-graph": "madge  --ts-config=tsconfig.json --circular --extensions ts --image madge-graph.svg ./src",
     "madge:graph": "madge  --ts-config=tsconfig.json --image  madge-graph.svg ./src/main.ts "
@@ -34,6 +35,7 @@
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
+    "angular-cli-ghpages": "^1.0.0-rc.1",
     "@angular-devkit/build-angular": "~0.1102.12",
     "@angular/cli": "~11.2.12",
     "@angular/compiler-cli": "~11.2.13",
