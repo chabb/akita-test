@@ -7,7 +7,10 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "madge:detect": "madge  --ts-config=tsconfig.json --circular --extensions ts ./src",
+    "madge:detect-graph": "madge  --ts-config=tsconfig.json --circular --extensions ts --image madge-graph.svg ./src",
+    "madge:graph": "madge  --ts-config=tsconfig.json --image  madge-graph.svg ./src/main.ts "
   },
   "private": true,
   "dependencies": {
@@ -24,6 +27,7 @@
     "akita-filters-plugin": "^6.0.0",
     "faker": "^5.5.3",
     "fakerator": "^0.3.2",
+    "madge": "^4.0.2",
     "ng-zorro-antd": "^11.4.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

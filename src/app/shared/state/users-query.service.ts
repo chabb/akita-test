@@ -27,6 +27,8 @@ export class UserQueryService {
     this.userFilters.getFilterValue(FILTERS.STATE_FILTER_ID) as Set<string> ??
     []).reduce((acc: any, v: string) => ({...acc, [v]: true}), {})
 
+  getProgressFilterValue = () => this.userFilters.getFilterValue(FILTERS.SEARCH_BY_PROGRESS_FILTER_ID) ?? [0, 100];
+
   searchFilterControl = () => new FormControl(this.userFilters.getFilterValue(FILTERS.SEARCH_FILTER_ID) ?? '');
   searchByNameControl = () => new FormControl(this.userFilters.getFilterValue(FILTERS.SEARCH_BY_NAME_FILTER_ID) ?? '');
   searchByStateControl = () => {
@@ -37,7 +39,7 @@ export class UserQueryService {
       checked: initialSelectedFilters[value]})));
   }
 
-  searchByProgressControl = () => new FormControl(this.userFilters.getFilterValue(FILTERS.SEARCH_BY_PROGRESS_FILTER_ID) ?? [0, 100]);
+  searchByProgressControl = () => new FormControl(this.getProgressFilterValue());
 
   updateSearchFilter(searchValue: string): void {
     if (!searchValue || searchValue.length === 0) {

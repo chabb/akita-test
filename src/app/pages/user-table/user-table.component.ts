@@ -31,6 +31,7 @@ export class UserTableComponent implements OnDestroy {
     (v: string) => this.query.updateSearchFilter(v.trim()));
 
   readonly searchByNameControl = this.query.searchByNameControl();
+  readonly progressFilterValue = this.query.getProgressFilterValue();
 
   readonly searchAction$ = new Subject<string>();
   private readonly searchSub = this.searchAction$.pipe(
