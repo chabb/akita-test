@@ -21,6 +21,10 @@ export class UserQueryService {
     this.userFilters = new AkitaFiltersPlugin<UsersStore>(this.userQuery);
   }
 
+  isLoadingTable(): Observable<boolean> {
+    return this.userQuery.selectLoading();
+  }
+
   // form controls helper
 
   getStateFiltersAsObject = () => Array.from(

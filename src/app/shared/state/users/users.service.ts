@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ID } from '@datorama/akita';
-import { tap } from 'rxjs/operators';
+import {finalize, take, tap} from 'rxjs/operators';
 import { UsersStore } from './users.store';
 import {InMemoryApiService} from '../../in-memory-api/in-memory-api.service';
 import {Observable} from 'rxjs';
@@ -12,9 +12,12 @@ export class UsersService {
   constructor(private usersStore: UsersStore, private api: InMemoryApiService) { }
 
   get(): Observable<User[]> {
-    return this.api.getUsers().pipe(tap(entities => {
-      this.usersStore.set(entities);
-    }));
+    this.usersStore.setLoading(true);
+    return this.api.getUsers().pipe(
+      take(1), // otherwise the list will be immediately updated once we regenerate the new users
+      tap(entities => this.usersStore.set(entities)),
+      finalize(() => this.usersStore.setLoading(false))
+    );
   }
 
   add(user: User): void {

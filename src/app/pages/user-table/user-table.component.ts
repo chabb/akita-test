@@ -6,6 +6,7 @@ import {tap} from 'rxjs/operators';
 import {UserViewModel} from '../../shared/state/users/users.store';
 import {FILTERS, STATE_FILTERS} from '../../shared/state/filters';
 import {UserQueryService} from '../../shared/state/users-query.service';
+import {InMemoryApiService} from '../../shared/in-memory-api/in-memory-api.service';
 
 
 @Component({
@@ -18,6 +19,7 @@ export class UserTableComponent implements OnDestroy {
 
   // ui state
   visible = false;
+  loading$ = this.query.isLoadingTable();
 
   // lists
   readonly listOfData$ = this.query.getFilteredUsersWithProgress();
@@ -39,10 +41,9 @@ export class UserTableComponent implements OnDestroy {
   ).subscribe(searchValue => this.query.updateSearchNameFilter(searchValue));
 
   constructor(private readonly userService: UsersService,
+              private readonly inMemoryApiService: InMemoryApiService,
               private readonly query: UserQueryService) {
-
-    // fetch datas, complete once request is successful
-    this.userService.get().subscribe();
+    this.reload();
   }
 
   onQueryParamsChange(params: NzTableQueryParams): void {
@@ -53,6 +54,15 @@ export class UserTableComponent implements OnDestroy {
         }
       });
     }
+  }
+
+  reload(): void {
+    // fetch datas, complete once request is successful
+    this.userService.get().subscribe();
+  }
+
+  regenerate(): void {
+    this.inMemoryApiService.generateUserTrigger.next();
   }
 
   identityFn(idx: number, item: UserViewModel): number {
