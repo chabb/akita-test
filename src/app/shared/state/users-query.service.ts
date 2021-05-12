@@ -7,7 +7,7 @@ import {Observable} from 'rxjs';
 import {User} from '../in-memory-api/types';
 import {map, startWith, switchMap} from 'rxjs/operators';
 import {ProgressQuery} from './progress/progress.query';
-import {FILTERS, getSearchOnNameFilter, getSearchFilter, getStateFilter, STATE_FILTERS} from './filters';
+import {FILTERS, getSearchOnNameFilter, getSearchFilter, getStateFilter, STATE_FILTERS, getProgressFilter} from './filters';
 import {FormControl} from '@angular/forms';
 
 @Injectable({ providedIn: 'root' })
@@ -23,12 +23,14 @@ export class UserQueryService {
 
   // form controls helper
 
+  getStateFiltersAsObject = () => Array.from(
+    this.userFilters.getFilterValue(FILTERS.STATE_FILTER_ID) as Set<string> ??
+    []).reduce((acc: any, v: string) => ({...acc, [v]: true}), {})
+
   searchFilterControl = () => new FormControl(this.userFilters.getFilterValue(FILTERS.SEARCH_FILTER_ID) ?? '');
   searchByNameControl = () => new FormControl(this.userFilters.getFilterValue(FILTERS.SEARCH_BY_NAME_FILTER_ID) ?? '');
   searchByStateControl = () => {
-    const initialSelectedFilters = Array.from(
-      this.userFilters.getFilterValue(FILTERS.STATE_FILTER_ID) as Set<string> ??
-      []).reduce((acc: any, v: string) => ({...acc, [v]: true}), {});
+    const initialSelectedFilters = this.getStateFiltersAsObject();
     return new FormControl(STATE_FILTERS.map(({text, value}) => ({
       value,
       label: text,
@@ -44,6 +46,15 @@ export class UserQueryService {
       this.userFilters.setFilter(getSearchFilter(searchValue));
     }
   }
+
+  updateProgressFilter(range: [number, number]): void {
+    if (!range || range[0] === 0 && range[1] === 100) {
+      this.userFilters.removeFilter(FILTERS.SEARCH_BY_PROGRESS_FILTER_ID);
+    } else {
+      this.userFilters.setFilter(getProgressFilter(range));
+    }
+  }
+
 
   updateStateFilter(states: Set<'a' | 'b' | 'c'>): void {
     if (!states || states.size === 0) {

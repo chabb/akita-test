@@ -16,15 +16,15 @@ import {UserQueryService} from '../../shared/state/users-query.service';
 
 export class UserTableComponent implements OnDestroy {
 
+  // ui state
   visible = false;
 
-  private readonly initialStateFilter = (this.query.userFilters.getFilterValue(FILTERS.STATE_FILTER_ID)
-    ? Array.from(this.query.userFilters.getFilterValue(FILTERS.STATE_FILTER_ID) as Set<string>)
-    : [])
-    .reduce((acc: any, v: string) => ({...acc, [v]: true}), {});
-  readonly filterState = STATE_FILTERS.map(filter => ({...filter, byDefault: !!this.initialStateFilter[filter.value]}));
-
+  // lists
   readonly listOfData$ = this.query.getFilteredUsersWithProgress();
+
+  // filters
+  private readonly initialStateFilter = this.query.getStateFiltersAsObject();
+  readonly filterState = STATE_FILTERS.map(filter => ({...filter, byDefault: !!this.initialStateFilter[filter.value]}));
 
   readonly overallFilterControl = this.query.searchFilterControl();
   private readonly overallFilterSubs = this.overallFilterControl.valueChanges.subscribe(

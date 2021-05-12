@@ -1,16 +1,26 @@
+<h1 *ngIf="(filters$ | async)!.length > 0 else empty"></h1>
 <div *ngFor="let filter of filters$ | async; trackBy: filterIdentityFn">
-     <div [ngSwitch]="filter.id">
-       <div *ngSwitchCase="FILTERS.SEARCH_BY_NAME_FILTER_ID">
-         Search by name filter
-         <input [formControl]="searchByNameControl"/>
-       </div>
-       <div *ngSwitchCase="FILTERS.SEARCH_FILTER_ID">
-         General search filter
-         <input [formControl]="searchFilterControl"/>
-       </div>
-       <div *ngSwitchCase="FILTERS.STATE_FILTER_ID">
-         State filter
-         <nz-checkbox-group [formControl]="searchByStateControl"></nz-checkbox-group>
-       </div>
-     </div>
+  <div [ngSwitch]="filter.id">
+    <div *ngSwitchCase="FILTERS.SEARCH_BY_NAME_FILTER_ID">
+      Search by name filter
+      <input [formControl]="searchByNameControl"/>
+    </div>
+    <div *ngSwitchCase="FILTERS.SEARCH_FILTER_ID">
+      General search filter
+      <input [formControl]="searchFilterControl"/>
+    </div>
+    <div *ngSwitchCase="FILTERS.STATE_FILTER_ID">
+      State filter
+      <nz-checkbox-group [formControl]="searchByStateControl"></nz-checkbox-group>
+    </div>
+  </div>
 </div>
+
+
+<ng-template #empty>
+  <div class="empty-container">
+    <nz-empty style="margin: auto" nzNotFoundContent="No filters defined"
+              nzNotFoundFooter="Use a filter in the table to make it appear here"></nz-empty>
+  </div>
+</ng-template>
+

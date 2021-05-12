@@ -12,11 +12,14 @@ interface CB {
   checked: boolean;
 }
 
+const A = {a: 1, b: 2};
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss']
 })
+
+
 export class FilterComponent implements OnDestroy {
 
   filters$ = this.query.userFilters.selectFilters();

@@ -13,6 +13,7 @@ export const getBaseFilter = (id: FILTERS, name: string, order: number) => ({id,
 export const baseSearchFilter = getBaseFilter(FILTERS.SEARCH_FILTER_ID, FILTERS.SEARCH_FILTER_ID, 2);
 export const baseStateFilter = getBaseFilter(FILTERS.STATE_FILTER_ID, FILTERS.STATE_FILTER_ID, 3);
 export const baseSearchByNameFilter = getBaseFilter(FILTERS.SEARCH_BY_NAME_FILTER_ID, FILTERS.SEARCH_BY_NAME_FILTER_ID, 4);
+export const baseProgressFilter = getBaseFilter(FILTERS.SEARCH_BY_PROGRESS_FILTER_ID, FILTERS.SEARCH_BY_PROGRESS_FILTER_ID, 5);
 
 export const getSearchFilter = (search: string) =>
   ({...baseSearchFilter,
@@ -31,6 +32,11 @@ export const getSearchOnNameFilter = (search: string) =>
     predicate: (v: UserViewModel) => searchFilterIn(search, v, 'name')
   });
 
+export const getProgressFilter = (range: [number, number]) =>
+  ({...baseProgressFilter,
+    value: range,
+    predicate: (v: UserViewModel) => v.progress ? v.progress * 100 >= range[0] && v.progress * 100 <= range[1] : false
+  });
 
 export const STATE_FILTERS = [
   { text: 'a', value: 'a' },

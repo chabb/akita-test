@@ -7,9 +7,10 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import {IconsProviderModule} from '../icons-provider.module';
+import { IconsProviderModule } from './icons-provider.module';
 import { NzSliderModule} from 'ng-zorro-antd/slider';
-import {NzStatisticModule} from 'ng-zorro-antd/statistic';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
 
 @NgModule({
   imports:      [ CommonModule ],
@@ -21,6 +22,7 @@ import {NzStatisticModule} from 'ng-zorro-antd/statistic';
     FormsModule,
     // ng-zorro
     NzLayoutModule,
+    NzCheckboxModule,
     NzMenuModule,
     NzTableModule,
     NzDropDownModule,
