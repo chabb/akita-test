@@ -1,1 +1,10 @@
-<p>progress-filter works!</p>
+<p> Filter users based on their progress </p>
+
+<div class="slider">
+  <nz-slider nzRange nzIncluded [nzMarks]="marks" [formControl]="progressControl"></nz-slider>
+  <div class="range">
+    <nz-statistic [nzValue]="progressControl.value[0]"  nzSuffix="% - "></nz-statistic>
+    <nz-statistic [nzValue]="progressControl.value[1]"  nzSuffix="%"></nz-statistic>
+  </div>
+
+</div>

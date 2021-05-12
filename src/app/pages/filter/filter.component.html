@@ -8,5 +8,9 @@
          General search filter
          <input [formControl]="searchFilterControl"/>
        </div>
+       <div *ngSwitchCase="FILTERS.STATE_FILTER_ID">
+         State filter
+         <nz-checkbox-group [formControl]="searchByStateControl"></nz-checkbox-group>
+       </div>
      </div>
 </div>

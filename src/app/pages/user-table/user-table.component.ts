@@ -1,11 +1,11 @@
 import {Component, OnDestroy} from '@angular/core';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
-import {UsersService} from '../../shared/state/users.service';
-import {FILTERS, UserQueryService} from '../../shared/state/progress.query';
-import {FormControl} from '@angular/forms';
+import {UsersService} from '../../shared/state/users/users.service';
 import {Subject} from 'rxjs';
 import {tap} from 'rxjs/operators';
-import {UserViewModel} from '../../shared/state/users.store';
+import {UserViewModel} from '../../shared/state/users/users.store';
+import {FILTERS, STATE_FILTERS} from '../../shared/state/filters';
+import {UserQueryService} from '../../shared/state/users-query.service';
 
 
 @Component({
@@ -18,20 +18,19 @@ export class UserTableComponent implements OnDestroy {
 
   visible = false;
 
-  initialStateFilter = (this.query.userFilters.getFilterValue(FILTERS.STATE_FILTER_ID)
+  private readonly initialStateFilter = (this.query.userFilters.getFilterValue(FILTERS.STATE_FILTER_ID)
     ? Array.from(this.query.userFilters.getFilterValue(FILTERS.STATE_FILTER_ID) as Set<string>)
     : [])
     .reduce((acc: any, v: string) => ({...acc, [v]: true}), {});
-
   readonly filterState = STATE_FILTERS.map(filter => ({...filter, byDefault: !!this.initialStateFilter[filter.value]}));
 
   readonly listOfData$ = this.query.getFilteredUsersWithProgress();
 
-  readonly overallFilterControl = new FormControl(this.query.userFilters.getFilterValue(FILTERS.SEARCH_FILTER_ID) ?? '');
+  readonly overallFilterControl = this.query.searchFilterControl();
   private readonly overallFilterSubs = this.overallFilterControl.valueChanges.subscribe(
-    v => this.query.updateSearchFilter(v.trim()));
+    (v: string) => this.query.updateSearchFilter(v.trim()));
 
-  readonly searchByNameControl = new FormControl(this.query.userFilters.getFilterValue(FILTERS.SEARCH_BY_NAME_FILTER_ID) ?? '');
+  readonly searchByNameControl = this.query.searchByNameControl();
 
   readonly searchAction$ = new Subject<string>();
   private readonly searchSub = this.searchAction$.pipe(
@@ -64,10 +63,3 @@ export class UserTableComponent implements OnDestroy {
     this.overallFilterSubs.unsubscribe();
   }
 }
-
-const STATE_FILTERS = [
-  { text: 'a', value: 'a' },
-  { text: 'b', value: 'b' },
-  { text: 'c', value: 'c' },
-  { text: 'd', value: 'd' },
-];

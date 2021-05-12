@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { ID } from '@datorama/akita';
 import { tap } from 'rxjs/operators';
 import { ProgressStore } from './progress.store';
-import {InMemoryApiService} from '../in-memory-api/in-memory-api.service';
-import {UserProgressEvent} from '../in-memory-api/types';
+import {InMemoryApiService} from '../../in-memory-api/in-memory-api.service';
+import {UserProgressEvent} from '../../in-memory-api/types';
 import {Observable} from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

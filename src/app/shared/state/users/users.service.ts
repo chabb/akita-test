@@ -1,11 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ID } from '@datorama/akita';
 import { tap } from 'rxjs/operators';
 import { UsersStore } from './users.store';
-import {InMemoryApiService} from '../in-memory-api/in-memory-api.service';
+import {InMemoryApiService} from '../../in-memory-api/in-memory-api.service';
 import {Observable} from 'rxjs';
-import {User} from '../in-memory-api/types';
+import {User} from '../../in-memory-api/types';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {

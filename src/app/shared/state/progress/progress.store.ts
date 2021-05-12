@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EntityState, EntityStore, StoreConfig } from '@datorama/akita';
-import {UserProgressEvent} from '../in-memory-api/types';
+import {UserProgressEvent} from '../../in-memory-api/types';
 
 export interface ProgressState extends EntityState<UserProgressEvent> {}
 

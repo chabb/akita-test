@@ -7,6 +7,9 @@ import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import {IconsProviderModule} from '../icons-provider.module';
+import { NzSliderModule} from 'ng-zorro-antd/slider';
+import {NzStatisticModule} from 'ng-zorro-antd/statistic';
 
 @NgModule({
   imports:      [ CommonModule ],
@@ -22,7 +25,10 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
     NzTableModule,
     NzDropDownModule,
     NzInputModule,
-    NzButtonModule
+    NzButtonModule,
+    NzSliderModule,
+    NzStatisticModule,
+    IconsProviderModule
     // project
   ]
 })
