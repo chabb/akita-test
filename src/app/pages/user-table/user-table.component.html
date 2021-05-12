@@ -7,6 +7,10 @@
   </ng-template>
 </div>
 
+<!-- uncomment to show it works as intented -->
+<!-- app-progress-filter></app-progress-filter-->
+
+
 <button nz-button nzType="default" (click)="reload()">Reload</button>
 <button nz-button nzType="default" (click)="regenerate()" nzDanger>Generate new users</button>
 
@@ -36,7 +40,11 @@
     <td>{{ data.state }}</td>
     <td>
       <div class="progress-outer">
-        <div class="progress-inner" style="width:{{data.progress! * 100}}%"></div>
+        <div class="progress-inner" style="width: {{data.progress! * 100}}%"></div>
+        <ng-container *ngIf="progressFilterValue$ | async as progressFilterValue">
+          <div class="progress-limit-min" style="width: {{progressFilterValue[0]}}%"></div>
+          <div class="progress-limit-max" style="width: {{ 100 - progressFilterValue[1]}}%"></div>
+        </ng-container>
       </div>
     </td>
   </tr>
@@ -54,3 +62,4 @@
     </div>
   </div>
 </nz-dropdown-menu>
+

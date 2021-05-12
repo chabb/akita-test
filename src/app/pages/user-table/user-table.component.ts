@@ -2,9 +2,9 @@ import {Component, OnDestroy} from '@angular/core';
 import {NzTableQueryParams} from 'ng-zorro-antd/table';
 import {UsersService} from '../../shared/state/users/users.service';
 import {Subject} from 'rxjs';
-import {tap} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {UserViewModel} from '../../shared/state/users/users.store';
-import {FILTERS, STATE_FILTERS} from '../../shared/state/filters';
+import {STATE_FILTERS} from '../../shared/state/filters';
 import {UserQueryService} from '../../shared/state/users-query.service';
 import {InMemoryApiService} from '../../shared/in-memory-api/in-memory-api.service';
 
@@ -33,7 +33,9 @@ export class UserTableComponent implements OnDestroy {
     (v: string) => this.query.updateSearchFilter(v.trim()));
 
   readonly searchByNameControl = this.query.searchByNameControl();
-  readonly progressFilterValue = this.query.getProgressFilterValue();
+
+  readonly progressFilterValue$ = this.query.userFilters.selectFilters().pipe(
+    map(_ => this.query.getProgressFilterValue()));
 
   readonly searchAction$ = new Subject<string>();
   private readonly searchSub = this.searchAction$.pipe(

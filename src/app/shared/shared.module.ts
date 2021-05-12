@@ -11,11 +11,16 @@ import { IconsProviderModule } from './icons-provider.module';
 import { NzSliderModule} from 'ng-zorro-antd/slider';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
+import {ProgressFilterComponent} from '../pages/progress-filter/progress-filter.component';
 
 @NgModule({
-  imports:      [ CommonModule ],
-  declarations: [ ],
-  exports:      [
+  imports:      [ CommonModule,
+    NzSliderModule,
+    NzStatisticModule,
+    FormsModule,
+    ReactiveFormsModule ],
+  declarations: [ ProgressFilterComponent],
+  exports: [
     // vendor
     CommonModule,
     ReactiveFormsModule,
@@ -30,8 +35,11 @@ import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
     NzButtonModule,
     NzSliderModule,
     NzStatisticModule,
-    IconsProviderModule
+    IconsProviderModule,
+    ProgressFilterComponent,
     // project
   ]
 })
 export class SharedModule { }
+
+// non-imported exported modules are NOT used by declared components

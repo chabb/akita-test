@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {UsersStore, UserViewModel} from './users/users.store';
 import {ProgressService} from './progress/progress.service';
-import {UsersQuery} from './users/users.query';
+import {UsersQuery, UsersWithProgressQuery} from './users/users.query';
 import {AkitaFiltersPlugin} from 'akita-filters-plugin';
 import {Observable} from 'rxjs';
 import {User} from '../in-memory-api/types';
@@ -14,11 +14,12 @@ import {FormControl} from '@angular/forms';
 export class UserQueryService {
   userFilters;
   constructor(private userStore: UsersStore,
+              private userWithProgressQuery: UsersWithProgressQuery,
               private progressQuery: ProgressQuery,
               private progressService: ProgressService,
               private userQuery: UsersQuery) {
     // @ts-ignore :(
-    this.userFilters = new AkitaFiltersPlugin<UsersStore>(this.userQuery);
+    this.userFilters = new AkitaFiltersPlugin<UsersStore>(this.userWithProgressQuery);
   }
 
   isLoadingTable(): Observable<boolean> {
@@ -80,18 +81,7 @@ export class UserQueryService {
 
   getFilteredUsersWithProgress(): Observable<UserViewModel[]> {
     // @ts-ignore :(
-    const select$: Observable<User[]> = this.userFilters.selectAllByFilters();
-    return select$.pipe(
-      // if we change the filters, we'll need to wait until progress reemit
-      switchMap(users => this.progressService.get(users.map(({id}) => id))
-        .pipe(
-          startWith(users),
-          switchMap(() => this.progressQuery.selectAll()
-            .pipe(
-              map(usersProgress => usersProgress
-                .reduce((acc, {id, progress}) => ({...acc, [id]: progress}), {} as {[userId: string]: number})),
-              map(progressMap => users.map(
-                u => ({...u, progress: progressMap[u.id]} as UserViewModel))))))));
+    const select$: Observable<UserViewModel[]> = this.userFilters.selectAllByFilters();
+    return select$;
   }
-
 }

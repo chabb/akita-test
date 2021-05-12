@@ -18,7 +18,7 @@ export class InMemoryApiService implements OnDestroy {
   generateUserTrigger = new Subject<void>();
 
   users$: Observable<User[]> = this.generateUserTrigger.pipe(
-    mergeMap(() => range(0, 10).pipe(
+    mergeMap(() => range(0, 10 + faker.datatype.number(10)).pipe(
       map(_ => generateUser()),
       toArray(),
     )),

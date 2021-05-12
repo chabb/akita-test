@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FilterComponent } from './pages/filter/filter.component';
-import {ProgressFilterComponent} from './pages/progress-filter/progress-filter.component';
+import { ProgressFilterComponent } from './pages/progress-filter/progress-filter.component';
 // make dependency explicit for madge
 import {WelcomeModule} from './pages/welcome/welcome.module';
 import {UserTableModule} from './pages/user-table/user-table.module';

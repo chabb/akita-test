@@ -13,8 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {FilterComponent} from './pages/filter/filter.component';
-import {ProgressFilterComponent} from './pages/progress-filter/progress-filter.component';
 import {NzEmptyModule} from 'ng-zorro-antd/empty';
+import {ProgressFilterComponent} from './pages/progress-filter/progress-filter.component';
 
 registerLocaleData(en);
 
@@ -22,7 +22,6 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     FilterComponent,
-    ProgressFilterComponent
   ],
   imports: [
     BrowserModule,
