@@ -60,6 +60,7 @@ export class UserTableComponent implements OnDestroy {
 
   reload(): void {
     // fetch datas, complete once request is successful
+    // handle error state here if you want to do it locally
     this.userService.get().subscribe();
   }
 

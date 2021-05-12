@@ -9,9 +9,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "deploy:github": "ng deploy --base-href=.",
-    "madge:detect": "madge  --ts-config=tsconfig.json --circular --extensions ts ./src",
+    "madge:detect": "madge --ts-config=tsconfig.json --circular --extensions ts ./src",
     "madge:detect-graph": "madge  --ts-config=tsconfig.json --circular --extensions ts --image madge-graph.svg ./src",
-    "madge:graph": "madge  --ts-config=tsconfig.json --image  madge-graph.svg ./src/main.ts "
+    "madge:graph": "madge --ts-config=tsconfig.json --image  madge-graph.svg ./src/main.ts "
   },
   "private": true,
   "dependencies": {
@@ -24,17 +24,16 @@
     "@angular/platform-browser-dynamic": "~11.2.13",
     "@angular/router": "~11.2.13",
     "@datorama/akita": "^6.1.3",
-    "@types/faker": "^5.5.4",
     "akita-filters-plugin": "^6.0.0",
     "faker": "^5.5.3",
-    "fakerator": "^0.3.2",
-    "madge": "^4.0.2",
     "ng-zorro-antd": "^11.4.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
   },
   "devDependencies": {
+    "@types/faker": "^5.5.4",
+    "madge": "^4.0.2",
     "angular-cli-ghpages": "^1.0.0-rc.1",
     "@angular-devkit/build-angular": "~0.1102.12",
     "@angular/cli": "~11.2.12",
