@@ -3,9 +3,7 @@ module.exports = {
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
-    /* ["@semantic-release/npm", { // we do not want to push a package
-      "tarballDir": "release"
-    }], */
+    "@semantic-release/npm", // will only bump version, as package.json as private: false
     /*["@semantic-release/github", { // no tarball release
       "assets": "release/*.tgz"
     }],*/
