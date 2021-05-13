@@ -58,7 +58,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     # Waits for test jobs for each Node.js version to complete
-    needs: [ Build ]
+    needs: [ Build, Release ]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -72,6 +72,8 @@ jobs:
         run: npm ci
 
       - name: Deploy
-        run: npm run deploy:github
+        run: npm run ng -- deploy --base-href=. --name="chabb" --email=chabbey78@gmail.org
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
