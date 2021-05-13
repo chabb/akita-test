@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/chabb/akita-test/compare/v1.1.0...v1.1.1) (2021-05-13)
+
+
+### Bug Fixes
+
+* remove non-used NPM_TOKEN env variable ([defce4f](https://github.com/chabb/akita-test/commit/defce4f1862b308335a823abb6ce5e635cfb0563))
+
 # [1.1.0](https://github.com/chabb/akita-test/compare/v1.0.0...v1.1.0) (2021-05-13)
 
 
