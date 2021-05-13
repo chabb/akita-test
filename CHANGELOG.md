@@ -4,6 +4,14 @@
 ### Features
 
 * **ci:** Add deploy ([d15f439](https://github.com/chabb/akita-test/commit/d15f4398ee7434ef3271ada5d3e2a4bd39b94a8d))
+* **doc:** Update readme ([aacd7b1](https://github.com/chabb/akita-test/commit/aacd7b1a6f28f8b6eb8e0a4b4b5f3ddffbcc0b11))
+
+# [1.2.0](https://github.com/chabb/akita-test/compare/v1.1.1...v1.2.0) (2021-05-13)
+
+
+### Features
+
+* **ci:** Add deploy ([d15f439](https://github.com/chabb/akita-test/commit/d15f4398ee7434ef3271ada5d3e2a4bd39b94a8d))
 
 ## [1.1.1](https://github.com/chabb/akita-test/compare/v1.1.0...v1.1.1) (2021-05-13)
 
