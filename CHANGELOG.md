@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/chabb/akita-test/compare/v1.0.0...v1.1.0) (2021-05-13)
+
+
+### Features
+
+* **doc:** Add version badge ([ad8c097](https://github.com/chabb/akita-test/commit/ad8c097f88fca4714ad5568b42b9023db75cd889))
+
 # 1.0.0 (2021-05-13)
 
 
