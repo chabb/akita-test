@@ -1,4 +1,5 @@
 [![build status](https://github.com/coryrylan/angular-github-actions/workflows/Build/badge.svg)](https://github.com/coryrylan/angular-github-actions/actions)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/chabb/akita-test)
 
 # ReactiveTable
 
