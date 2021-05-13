@@ -22,3 +22,4 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 * Deploy on gh-pages after a succesful build
 * Add prettier/husky and family
 * Alternate NgRX Implementation
+* And more...
