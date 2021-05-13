@@ -3,11 +3,17 @@ module.exports = {
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     "@semantic-release/changelog",
-    "@semantic-release/npm", // will only bump version, as package.json as private: false
+    //should only bump version
+    [
+      "@semantic-release/npm",
+      {
+        npmPublish: false
+      }
+    ],
     /*["@semantic-release/github", { // no tarball release
       "assets": "release/*.tgz"
     }],*/
-    "@semantic-release/git"  // push tags
+    "@semantic-release/git"  // push tags,
   ],
   "preset": "angular"
 }

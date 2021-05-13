@@ -1,7 +1,7 @@
 {
   "name": "reactive-table",
   "version": "0.0.0",
-  "private": "false",
+  "private": "true",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -10,12 +10,11 @@
     "lint": "ng lint",
     "lint:yaml": "yaml-validator .github/workflows/build.yml",
     "e2e": "ng e2e",
-    "deploy:github": "ng deploy --base-href=.",
+    "deploy:github": "ng deploy --base-href=. --no-silent",
     "madge:detect": "madge --ts-config=tsconfig.json --circular --extensions ts ./src",
     "madge:detect-graph": "madge  --ts-config=tsconfig.json --circular --extensions ts --image madge-graph.svg ./src",
     "madge:graph": "madge --ts-config=tsconfig.json --image  madge-graph.svg ./src/main.ts "
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "~11.2.13",
     "@angular/common": "~11.2.13",
