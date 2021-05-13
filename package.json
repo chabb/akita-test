@@ -7,6 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
+    "lint:yaml": "yaml-validator .github/workflows/build.yml",
     "e2e": "ng e2e",
     "deploy:github": "ng deploy --base-href=.",
     "madge:detect": "madge --ts-config=tsconfig.json --circular --extensions ts ./src",
@@ -59,6 +60,7 @@
     "semantic-release": "^17.4.3",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.1.5"
+    "typescript": "~4.1.5",
+    "yaml-validator": "^3.0.1"
   }
 }
