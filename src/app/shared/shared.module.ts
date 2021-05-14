@@ -14,11 +14,12 @@ import {NzCheckboxModule} from 'ng-zorro-antd/checkbox';
 import {ProgressFilterComponent} from '../pages/progress-filter/progress-filter.component';
 
 @NgModule({
-  imports:      [ CommonModule,
-    NzSliderModule,
-    NzStatisticModule,
+  imports:      [
     FormsModule,
-    ReactiveFormsModule ],
+    ReactiveFormsModule,
+    CommonModule,
+    NzSliderModule,
+    NzStatisticModule],
   declarations: [ ProgressFilterComponent],
   exports: [
     // vendor
@@ -35,11 +36,16 @@ import {ProgressFilterComponent} from '../pages/progress-filter/progress-filter.
     NzButtonModule,
     NzSliderModule,
     NzStatisticModule,
-    IconsProviderModule,
-    ProgressFilterComponent,
     // project
+    IconsProviderModule,
+    ProgressFilterComponent
   ]
 })
 export class SharedModule { }
 
 // non-imported exported modules are NOT used by declared components
+
+// if you declare service providers, or import modules that declare providers, you
+// might end up with multiple version of a services ( one for each lazy-loaded
+// modules ), but in most cases, you want singletion app-wide instance of
+// a given service

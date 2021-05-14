@@ -15,6 +15,7 @@ import {SharedModule} from './shared/shared.module';
 import {FilterComponent} from './pages/filter/filter.component';
 import {NzEmptyModule} from 'ng-zorro-antd/empty';
 import {NzSwitchModule} from 'ng-zorro-antd/switch';
+import {configureConfigProvider} from './configuration.provider';
 
 registerLocaleData(en);
 
@@ -36,7 +37,10 @@ registerLocaleData(en);
     AppRoutingModule,
     SharedModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [
+    { provide: NZ_I18N, useValue: en_US },
+    configureConfigProvider('test')
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
