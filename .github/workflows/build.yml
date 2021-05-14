@@ -30,7 +30,7 @@ jobs:
       - name: npm build and test
         run: |
           npm ci
-          npm run build
+          npm run test:prod
   release:
     # Only release on push to master
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
