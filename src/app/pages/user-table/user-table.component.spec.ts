@@ -1,20 +1,27 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { UserTableComponent } from './user-table.component';
+import {ComponentFixture} from '@angular/core/testing';
+import {UserTableComponent} from './user-table.component';
+import {MockBuilder, MockRender} from 'ng-mocks';
+import {UserTableModule} from './user-table.module';
+import {UserQueryService} from '../../shared/state/users-query.service';
+import {FormControl} from '@angular/forms';
+import {of} from 'rxjs';
+import {UsersService} from '../../shared/state/users/users.service';
 
 describe('UserTableComponent', () => {
   let component: UserTableComponent;
   let fixture: ComponentFixture<UserTableComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ UserTableComponent ]
-    })
-    .compileComponents();
-  });
+  beforeEach(() => MockBuilder(UserTableComponent, UserTableModule)
+    .mock(UsersService, { get: () => of([])})
+    .mock(UserQueryService, {
+      getStateFiltersAsObject: () => ({ a: true, b: false, c: false, d: false }),
+      searchFilterControl: () => new FormControl(''),
+      searchByNameControl: () => new FormControl(''),
+      userFilters: {selectFilters: () => of([] as any)}
+    } as UserQueryService));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserTableComponent);
+    fixture = MockRender(UserTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -22,4 +29,5 @@ describe('UserTableComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-});
+})
+;
