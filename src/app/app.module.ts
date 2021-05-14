@@ -14,7 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {SharedModule} from './shared/shared.module';
 import {FilterComponent} from './pages/filter/filter.component';
 import {NzEmptyModule} from 'ng-zorro-antd/empty';
-import {ProgressFilterComponent} from './pages/progress-filter/progress-filter.component';
+import {NzSwitchModule} from 'ng-zorro-antd/switch';
 
 registerLocaleData(en);
 
@@ -24,13 +24,17 @@ registerLocaleData(en);
     FilterComponent,
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-    SharedModule,
-    environment.production ? [] : AkitaNgDevtools.forRoot(),
+    // angular
     HttpClientModule,
     BrowserAnimationsModule,
-    NzEmptyModule
+    BrowserModule,
+    // vendored
+    NzEmptyModule,
+    NzSwitchModule,
+    environment.production ? [] : AkitaNgDevtools.forRoot(),
+    // local
+    AppRoutingModule,
+    SharedModule
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

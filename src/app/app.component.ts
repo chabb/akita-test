@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {UserQueryService} from './shared/state/users-query.service';
+import {FilterType} from './shared/state/types';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +11,12 @@ export class AppComponent {
 
   title = 'app-reactive';
 
-  constructor() {}
-
+  constructor(private readonly userqueryService: UserQueryService) {}
   isCollapsed = false;
+
+  onSwitchChanged(value: boolean): void {
+    this.userqueryService.filterType$.next(
+      value ? FilterType.GRAY_ROW : FilterType.REMOVE_ROW
+    );
+  }
 }

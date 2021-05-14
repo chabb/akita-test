@@ -54,10 +54,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   deploy:
-    # Only release on push to master
+    # Only deplay on push to master, after a successful build and release
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-    # Waits for test jobs for each Node.js version to complete
     needs: [ Build, Release ]
     steps:
       - name: Checkout

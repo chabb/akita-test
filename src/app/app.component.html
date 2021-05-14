@@ -43,7 +43,13 @@
                [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
             ></i>
         </span>
+        <span class="switch">
+          Display filtered values
+          <nz-switch [ngModel]="false" (ngModelChange)="onSwitchChanged($event)"></nz-switch>
+        </span>
       </div>
+
+
     </nz-header>
     <nz-content>
       <div class="inner-content">

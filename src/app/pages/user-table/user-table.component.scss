@@ -40,6 +40,10 @@
   }
 }
 
+.filtered {
+  transition: opacity 0.3s;
+  opacity: 0.2;
+}
 
 .filter {
   margin: 0 0 16px 0;
