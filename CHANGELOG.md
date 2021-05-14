@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/chabb/akita-test/compare/v1.2.0...v1.3.0) (2021-05-14)
+
+
+### Features
+
+* **filters:** Visualize which rows are filtered ([fa379dc](https://github.com/chabb/akita-test/commit/fa379dc8d3822cbed97fded112a147c9d77df02d))
+
 # [1.2.0](https://github.com/chabb/akita-test/compare/v1.1.1...v1.2.0) (2021-05-13)
 
 
