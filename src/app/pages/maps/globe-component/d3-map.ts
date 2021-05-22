@@ -2,7 +2,6 @@
 import * as d3 from 'd3';
 // @ts-ignore
 import geoZoom from 'd3-geo-zoom';
-import {UserViewModel} from '../../../shared/state/users/users.store';
 
 export type Globe = { node: any; updateProjection:
     (lng: number, lat: number) => void; updateUsers: (topojsonUsers: any) => void };
