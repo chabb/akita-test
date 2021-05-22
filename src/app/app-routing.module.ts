@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'progress-filters', component: ProgressFilterComponent },
   { path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule as WelcomeModule) },
   { path: 'monitor', loadChildren: () => import('./pages/user-table/user-table.module').then(m => m.UserTableModule as UserTableModule) },
+  { path: 'maps', loadChildren: () => import('./pages/maps/maps.module').then(m => m.MapsModule) },
 ];
 
 @NgModule({

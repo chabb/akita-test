@@ -11,11 +11,16 @@ export class UsersService {
 
   constructor(private usersStore: UsersStore, private api: InMemoryApiService) { }
 
+
+
   get(): Observable<User[]> {
     this.usersStore.setLoading(true);
     return this.api.getUsers().pipe(
       take(1), // otherwise the list will be immediately updated once we regenerate the new users
-      tap(entities => this.usersStore.set(entities)),
+      tap(entities => {
+        console.log('set entities', entities);
+        this.usersStore.set(entities);
+      }),
       finalize(() => this.usersStore.setLoading(false))
     );
   }

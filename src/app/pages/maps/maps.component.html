@@ -1,0 +1,15 @@
+<div class="maps">
+  <google-map
+    [zoom]="8"
+    [mapTypeId]="type"
+    [center]="(center$ | async)!">
+    <map-marker *ngFor="let position of userPositions$ | async" [position]="position"></map-marker>
+  </google-map>
+  <app-globe
+    [latitude]="(lat$ | async)!"
+    [longitude]="(lng$ | async)!"
+    [users]="topojsonusers$ | async"></app-globe>
+</div>
+
+
+<button nz-button nzType="default" (click)="regenerate()" nzDanger> Regenerate and reload </button>

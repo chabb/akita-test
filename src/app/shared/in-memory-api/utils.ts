@@ -7,5 +7,7 @@ export const generateUser = () => {
   const state = ABC[faker.datatype.number(3)];
   const name = faker.name.findName(); // Rowan Nikolaus
   const email = faker.internet.email(); // Kassandra.Haley@erich.biz
-  return { id, name, email, state } as User;
+  const longitude = faker.address.latitude(20, -20);
+  const latitude = faker.address.longitude(20, -20);
+  return { id, name, email, state, longitude, latitude } as User;
 };
