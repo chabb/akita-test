@@ -4,6 +4,7 @@ import { MapsRoutingModule } from './maps-routing.module';
 import { MapsComponent } from './maps.component';
 import {GoogleMapsModule} from '@angular/google-maps';
 import {GlobeComponent} from './globe-component/globe.component';
+import {configureRotationIntervalProvider} from './providers';
 
 
 @NgModule({
@@ -15,6 +16,9 @@ import {GlobeComponent} from './globe-component/globe.component';
     CommonModule,
     GoogleMapsModule,
     MapsRoutingModule,
+  ],
+  providers: [
+    configureRotationIntervalProvider()
   ]
 })
 export class MapsModule { }

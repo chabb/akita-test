@@ -8,7 +8,7 @@ import {ProgressQuery} from './progress/progress.query';
 import {FILTERS, getProgressFilter, getSearchFilter, getSearchOnNameFilter, getStateFilter, STATE_FILTERS} from './filters';
 import {FormControl} from '@angular/forms';
 import {FilterType} from './types';
-import {map, switchMap} from 'rxjs/operators';
+import {map, shareReplay, switchMap} from 'rxjs/operators';
 import {getEntityType, SortByOptions} from '@datorama/akita';
 import {User} from '../in-memory-api/types';
 
@@ -17,6 +17,14 @@ export class UserQueryService {
   userFilters;
 
   filterType$ = new BehaviorSubject<FilterType>(FilterType.REMOVE_ROW);
+
+  // @ts-ignore :(
+  select$: Observable<UserViewModel[]> = this.filterType$.pipe(
+    // @ts-ignore :(
+    switchMap(filterType => iif(() => filterType === FilterType.REMOVE_ROW,
+      this.userFilters.selectAllByFilters(),
+      this.selectAndMarkFiltered()
+    )));
 
   constructor(private userStore: UsersStore,
               private userWithProgressQuery: UsersWithProgressQuery,
@@ -85,15 +93,7 @@ export class UserQueryService {
   }
 
   getFilteredUsersWithProgress(): Observable<UserViewModel[]> {
-    // @ts-ignore :(
-    const select$: Observable<UserViewModel[]> = this.filterType$.pipe(
-      // @ts-ignore :(
-      switchMap(filterType => iif(() => filterType === FilterType.REMOVE_ROW,
-          this.userFilters.selectAllByFilters(),
-          this.selectAndMarkFiltered()
-        )));
-    this.userFilters.selectAllByFilters();
-    return select$;
+    return this.select$;
   }
 
   private selectAndMarkFiltered(): Observable<Array<UserViewModel>> {

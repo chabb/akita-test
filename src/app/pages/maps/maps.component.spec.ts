@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MapsComponent } from './maps.component';
+import {configureRotationIntervalProvider} from './providers';
 
 describe('MapsComponent', () => {
   let component: MapsComponent;
@@ -8,7 +9,8 @@ describe('MapsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MapsComponent ]
+      declarations: [ MapsComponent ],
+      providers: [ configureRotationIntervalProvider()]
     })
     .compileComponents();
   });
