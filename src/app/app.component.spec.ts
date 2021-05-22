@@ -6,7 +6,7 @@ import {AppModule} from './app.module';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
-    return MockBuilder(AppComponent, AppModule)
+    return MockBuilder(AppComponent, AppModule);
   });
 
   it('should create the app', () => {

@@ -128,7 +128,7 @@ export class UserQueryService {
       });
     }
 
-    //TODO: implement sorting
+    // TODO: implement sorting
     return entitiesFiltered;
   }
 }

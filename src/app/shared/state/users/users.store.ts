@@ -6,9 +6,7 @@ import {User} from '../../in-memory-api/types';
 type Diff<T, U> = T extends U ? never : T;
 type RequiredExceptFor<T, TOptional extends keyof T> = Pick<T, Diff<keyof T, TOptional>> & Partial<T>;
 
-export type UserViewModel = RequiredExceptFor<UserWithProgress, 'progress'> & { filtered?: boolean}
-
-
+export type UserViewModel = RequiredExceptFor<UserWithProgress, 'progress'> & { filtered?: boolean};
 
 export interface UsersState extends EntityState<User> {}
 
@@ -19,5 +17,4 @@ export class UsersStore extends EntityStore<UsersState> {
   constructor() {
     super();
   }
-
 }
