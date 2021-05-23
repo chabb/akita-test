@@ -85,11 +85,9 @@ export class MapsComponent implements OnInit, OnDestroy, AfterViewInit {
     this.userService.get().subscribe();
   }
 
-  ngOnDestroy(): void {
-  }
+  ngOnDestroy(): void { }
 
   ngOnInit(): void {}
 
-  ngAfterViewInit(): void {
-  }
+  ngAfterViewInit(): void {}
 }

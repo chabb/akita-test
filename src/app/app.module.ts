@@ -22,7 +22,7 @@ registerLocaleData(en);
 @NgModule({
   declarations: [
     AppComponent,
-    FilterComponent,
+    FilterComponent
   ],
   imports: [
     // angular
