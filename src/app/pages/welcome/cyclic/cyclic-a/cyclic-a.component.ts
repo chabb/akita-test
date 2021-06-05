@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+// import {CyclicBComponent} from '../cyclic-b/cyclic-b.component';
 
 @Component({
   selector: 'app-cyclic-a',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CyclicAComponent implements OnInit {
 
+  // @ViewChild(CyclicBComponent) c!: CyclicAComponent;
   constructor() { }
 
   ngOnInit(): void {
