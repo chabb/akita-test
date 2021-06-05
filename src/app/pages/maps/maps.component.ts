@@ -40,7 +40,6 @@ export class MapsComponent implements OnInit, OnDestroy, AfterViewInit {
       lng: Number.parseInt(longitude, 10)
     }))),
     // the issue is that new values are emitted because progress value changed
-    // tap(a => { console.log('STREAM', a); }),
     shareReplay({bufferSize: 1, refCount: true}));
 
 
@@ -49,19 +48,7 @@ export class MapsComponent implements OnInit, OnDestroy, AfterViewInit {
     // tap(a => console.log('---------', a)),
   );
 
-  private readonly userLength$ = this.userPositions$.pipe(
-    map(a => a.length),
-    distinctUntilChanged()
-  );
-
-  private readonly userRotation$ = merge(of(-1), interval(this.rotationInterval)).pipe(
-    map(a => a + 1),
-    withLatestFrom(this.userLength$),
-    takeWhile(([currentUser, userLength]) => currentUser <= userLength, false),
-    map(([i, _]) => i),
-    repeat());
-
-  readonly center$ = this.userRotation$.pipe(
+  readonly center$ = this.userQueryService.userRotation$.pipe(
     withLatestFrom(this.userPositions$),
     filter(([_, a]) => a.length > 0), // no rotation if no users
     tap(a => console.log('center', a)),
@@ -74,9 +61,9 @@ export class MapsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   constructor(private readonly userQueryService: UserQueryService,
               private readonly inMemoryService: InMemoryApiService,
-              private readonly userService: UsersService,
-              @Inject(ROTATION_INTERVAL_TOKEN) private readonly rotationInterval: number
+              private readonly userService: UsersService
               ) {
+    // error due to request should be handled here
     this.userService.get().subscribe();
   }
 

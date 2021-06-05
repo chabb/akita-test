@@ -16,6 +16,7 @@ import {FilterComponent} from './pages/filter/filter.component';
 import {NzEmptyModule} from 'ng-zorro-antd/empty';
 import {NzSwitchModule} from 'ng-zorro-antd/switch';
 import {configureConfigProvider} from './configuration.provider';
+import {configureRotationIntervalProvider} from './pages/maps/providers';
 
 registerLocaleData(en);
 
@@ -39,7 +40,8 @@ registerLocaleData(en);
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
-    configureConfigProvider('test')
+    configureConfigProvider('test'),
+    configureRotationIntervalProvider()
   ],
   bootstrap: [AppComponent]
 })

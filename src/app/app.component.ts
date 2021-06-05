@@ -10,6 +10,7 @@ import {FilterType} from './shared/state/types';
 export class AppComponent {
 
   title = 'app-reactive';
+  readonly currentUser$ = this.userqueryService.userRotation$;
 
   constructor(private readonly userqueryService: UserQueryService) {}
   isCollapsed = false;

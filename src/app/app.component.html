@@ -46,6 +46,9 @@
                [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
             ></i>
         </span>
+        <span>
+          Current Focused User: {{currentUser$ | async }}
+        </span>
         <span class="switch">
           Display filtered values
           <nz-switch [ngModel]="false" (ngModelChange)="onSwitchChanged($event)"></nz-switch>

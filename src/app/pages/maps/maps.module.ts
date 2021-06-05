@@ -18,7 +18,6 @@ import {configureRotationIntervalProvider} from './providers';
     MapsRoutingModule,
   ],
   providers: [
-    configureRotationIntervalProvider()
   ]
 })
 export class MapsModule { }
