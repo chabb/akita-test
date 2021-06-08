@@ -20,5 +20,5 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 ## Todo
 
 * Configure semver to accept a limited set of scopes
-* Add prettier/husky and family
+* Add prettier/husky and family ( correct format for CI )
 * Alternate NgRX Implementation
