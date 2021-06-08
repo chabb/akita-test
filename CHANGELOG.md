@@ -1,3 +1,10 @@
+## [1.3.1](https://github.com/chabb/akita-test/compare/v1.3.0...v1.3.1) (2021-06-08)
+
+
+### Bug Fixes
+
+* **doc:** fix docs ([5422d72](https://github.com/chabb/akita-test/commit/5422d726a4486d7654a009d3e0ae3071de902404))
+
 # [1.3.0](https://github.com/chabb/akita-test/compare/v1.2.0...v1.3.0) (2021-05-14)
 
 
